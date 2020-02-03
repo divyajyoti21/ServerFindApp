@@ -1,0 +1,47 @@
+<div class="table-responsive" style="border:1px solid lightgrey;height:550px;width:100%;">
+<table class="table table-bordered table-striped" style="width:100%;"> 
+        <thead class=""> 
+          <tr> 
+              <th style="width:58%;font-size:14px;"><button style="background-color: transparent;border: 0px;" (click)="clearFilter()"><i class="fas fa-times-circle"></i></button>Server Details</th>
+              <th style="width:24.5%;font-size:14px;"><app-selectdropdownfilter  [filterHeader] = "['Location']" [dropDownValues]="['','AMSTERDAM','SINGAPORE','WASHINGTON','DALLAS','SANFRANSCISCO','FRANKFURT']"  (selectedValue) = "locationChanged($event)" ></app-selectdropdownfilter></th>
+              <th style="width:2.5%;font-size:14px;"><app-rangeslider [filterHeader] = "['HDD(Count)']" [sliderRange] = "['0','1','2','4','6','8','10','12','14','16','18','24']" [sliderValues] = "[0,1,2,4,6,8,10,12,14,16,18,24]" (rangeSliderValue) = "hddCountSlider($event)"></app-rangeslider></th>
+              <th style="width:2.5%;font-size:14px;"><app-selectdropdownfilter  [filterHeader] = "['HDD(Type)']" [dropDownValues]="['','SAS','SATA2','SSD']"  (selectedValue) = "hddTypeChanged($event)" ></app-selectdropdownfilter></th>
+              <th style="width:2.5%;font-size:14px;"><app-rangeslider [filterHeader] = "['HDD(Storage)']" [sliderRange] = "['0','250GB','500GB','1TB','2TB','3TB','4TB','8TB','12TB','24TB','48TB','72TB']" [sliderValues] = "[0,250,500,1,2,3,4,8,12,24,48,72]" (rangeSliderValue) = "hddStorageSlider($event)"></app-rangeslider></th>
+              <th style="width:2.5%;font-size:14px;">RAM(Type)</th>
+              <th style="width:2.5%;font-size:14px;"><app-checkboxfilter (checkBoxEvent) = "checkValue($event)"></app-checkboxfilter></th>
+              <th style="width:2.5%;font-size:14px;">Currency</th>
+              <th style="width:2.5%;font-size:14px;">Price</th>     
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr *ngFor="let item of pagedItems" >
+              <td nowrap style="width:30%;font-size:14px;height:20px;">{{item.model}}</td>
+              <td nowrap style="width:30%;font-size:14px;height:5%;">{{item.location}}</td>
+              <td nowrap style="width:5%;font-size:14px;height:5%;">{{item.hdd.count}}</td>
+              <td nowrap style="width:5%;font-size:14px;height:5%;">{{item.hdd.type}}</td>
+              <td nowrap style="width:5%;font-size:14px;height:5%;">{{item.hdd.memory}}{{item.hdd.unit}}</td>
+              <td nowrap style="width:5%;font-size:14px;height:5%;">{{item.ram.type}}</td>
+              <td nowrap style="width:10%;font-size:14px;height:5%;">{{item.ram.memory}}{{item.ram.unit}}</td>
+              <td nowrap style="width:5%;font-size:14px;height:5%;">{{item.price.currency}}</td>
+              <td nowrap style="width:5%;font-size:14px;height:5%;">{{item.price.amountCents}}{{item.price.currencySymbol}}</td>     
+          </tr>
+        </tbody>
+</table>
+</div>
+          <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" (click)="setPage(1)">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" (click)="setPage(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" class="page-item" [ngClass]="{active:pager.currentPage === page}">
+                    <a class="page-link"  (click)="setPage(page)">{{page}}</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" (click)="setPage(pager.currentPage + 1)">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" (click)="setPage(pager.totalPages)">Last</a>
+                </li>
+            </ul>

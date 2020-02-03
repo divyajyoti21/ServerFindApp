@@ -1,0 +1,7 @@
+<div class="dropdown">
+    <span><i class="fa fa-filter" aria-hidden="true">{{filterHeader[0]}}</i></span>
+    <div class="dropdown-content">
+        <input type="range" min="0" max="11" step="1" value="0" (change)="sliderValue($event)">
+        <label>{{displayValue}}</label>
+    </div>
+  </div>

@@ -1,0 +1,8 @@
+<div class="dropdown">
+    <span><i class="fa fa-filter" aria-hidden="true">{{filterHeader[0]}}</i></span>
+    <div class="dropdown-content">
+        <select  (change)="dropDownValueChanged($event)" style="width:100px;border-radius: 1px;background-color: white;">
+            <option *ngFor="let value of dropDownValues" [value]="value">{{value}}</option>
+        </select>
+    </div>
+</div>
